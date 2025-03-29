@@ -709,83 +709,91 @@ const Page4: FC = () => {
   );
 };
 
-const Page5: FC = () => {
+
+
+const Page5 = () => {
   const navigate = useNavigate();
 
+  // Handle the image click and navigate to the buttons page
+  const handleImageClick = (imageId: string) => {
+    navigate(`/buttons-page/${imageId}`); // Pass imageId to navigate to the corresponding page
+  };
+
   return (
-    <Box sx={{ minHeight: "100vh", width: "100%", backgroundColor: "#81A895" }}>
+    <Box sx={{ minHeight: '100vh', width: '100%', backgroundColor: '#81A895' }}>
       <AppHeader />
       <Typography
         variant="h4"
         color="white"
-        sx={{ mb: 3, fontWeight: "bold", textAlign: "center", mt: 4 }}
+        sx={{ mb: 3, fontWeight: 'bold', textAlign: 'center', mt: 4 }}
       >
         Social Sustainability
       </Typography>
-      <Container sx={{ textAlign: "center", padding: 4 }}>
+      <Container sx={{ textAlign: 'center', padding: 4 }}>
         <Grid container spacing={4} justifyContent="center">
+          {/* Image Grid */}
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text1}
               alt="Social Image 1"
-              onClick={() => navigate("/social-details/1")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('1')} // Navigate to buttons page for text1 image
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text2}
               alt="Social Image 2"
-              onClick={() => navigate("/social-details/2")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('2')} // Navigate to buttons page for text2 image
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text3}
               alt="Social Image 3"
-              onClick={() => navigate("/social-details/3")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('3')}
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text4}
               alt="Social Image 4"
-              onClick={() => navigate("/social-details/4")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('4')}
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text5}
               alt="Social Image 5"
-              onClick={() => navigate("/social-details/5")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('5')}
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text6}
               alt="Social Image 6"
-              onClick={() => navigate("/social-details/6")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('6')}
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text7}
               alt="Social Image 7"
-              onClick={() => navigate("/social-details/7")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('7')}
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <img
               src={text8}
               alt="Social Image 8"
-              onClick={() => navigate("/social-details/8")}
-              style={{ width: "100%", height: "30vh", borderRadius: "2px", cursor: "pointer" }}
+              onClick={() => handleImageClick('8')}
+              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
             />
           </Grid>
         </Grid>
@@ -793,90 +801,435 @@ const Page5: FC = () => {
     </Box>
   );
 };
-
-// SocialDetailPage - Displays buttons for each image clicked
-const SocialDetailPage = () => {
+const ButtonsPage = () => {
   const navigate = useNavigate();
-  const pageId = window.location.pathname.split("/").pop(); // Extract the page ID from the URL.
+  const { imageId } = useParams();
+  const buttonStyle = {
+    backgroundColor: '#DBDD7A',
+    color: 'black',
+    py: 1.5,
+    px: 3,
+    borderRadius: '12px',
+    fontWeight: 'bold',
+    textTransform: 'none',
+    mb: 2,
+    width: '100%',
+    '&:hover': { backgroundColor: '#c5c76e' },
+  };
+
+
+  const getPageTitle = (id: string) => {
+    switch (id) {
+      case '1':
+        return 'EMPLOYEES';
+      case '2':
+        return 'HEALTH & SAFETY';
+      case '3':
+        return 'EDUCATION';
+      case '4':
+        return 'HOUSING';
+      case '5':
+        return 'GRIEVANCES';
+      case '6':
+        return 'SOCIAL SECURITY';
+      case '7':
+        return 'CSR';
+      case '8':
+        return 'REHABILITATION';
+      default:
+        return '';
+    }
+  };
+
+  const renderButtonsForImage = (imageId: string) => {
+    switch (imageId) {
+      case '1':
+        return (
+          <Grid container spacing={2} justifyContent="flex-start">
+            <Grid item sm={2} md={6}>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => console.log('Clicked No. employees')}
+                sx={{
+                  backgroundColor: '#DBDD7A',
+                  color: 'black',
+                  py: 1.5,
+                  px: 3,
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  textTransform: 'none',
+                  mb: 2,
+                  '&:hover': { backgroundColor: '#c5c76e' },
+                }}
+              >
+                No. employees
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => console.log('Clicked Ave,salary,rationale for salary')}
+                sx={{
+                  backgroundColor: '#DBDD7A',
+                  color: 'black',
+                  py: 1.5,
+                  px: 3,
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  textTransform: 'none',
+                  mb: 2,
+                  '&:hover': { backgroundColor: '#c5c76e' },
+                }}
+              >
+                Ave,Salary,Rationale for salary
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => console.log('Clicked Bonuses/incentives/other benefits')}
+                sx={{
+                  backgroundColor: '#DBDD7A',
+                  color: 'black',
+                  py: 1.5,
+                  px: 3,
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  textTransform: 'none',
+                  mb: 2,
+                  '&:hover': { backgroundColor: '#c5c76e' },
+                }}
+              >
+                Bonuses/incentives/other benefits
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => console.log('Clicked salary expenses on cost')}
+                sx={{
+                  backgroundColor: '#DBDD7A',
+                  color: 'black',
+                  py: 1.5,
+                  px: 3,
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  textTransform: 'none',
+                  mb: 2,
+                  '&:hover': { backgroundColor: '#c5c76e' },
+                }}
+              >
+                Salary expenses on cost
+              </Button>
+            </Grid>
+          </Grid>
+        );
+        case '2':
+        return (
+          <>
+          <Grid container spacing={4} justifyContent="flex-start">
+          <Grid item sm={2} md={6}>
+            <Button
+              variant="contained"
+              onClick={() => console.log('Clicked Health Spending %')}
+              sx={{
+                backgroundColor: '#DBDD7A',
+                color: 'black',
+                py: 1.5,
+                px: 3,
+                borderRadius: '12px',
+                fontWeight: 'bold',
+                '&:hover': { backgroundColor: '#DBDD7A' },
+              }}
+            >
+              Health Spending %
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => console.log('Clicked Accidents')}
+              sx={{
+                backgroundColor: '#DBDD7A',
+                color: 'black',
+                py: 1.5,
+                px: 3,
+                borderRadius: '12px',
+                fontWeight: 'bold',
+                '&:hover': { backgroundColor: '#DBDD7A' },
+              }}
+            >
+              Accidents
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => console.log('Clicked Safety Spending %')}
+              sx={{
+                backgroundColor: '#DBDD7A',
+                color: 'black',
+                py: 1.5,
+                px: 3,
+                borderRadius: '12px',
+                fontWeight: 'bold',
+                '&:hover': { backgroundColor: '#DBDD7A' },
+              }}
+            >
+              Safety Spending %
+            </Button>
+            </Grid>
+            </Grid>
+          </>
+        );
+      case '3':
+        return (
+          <>
+          <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              onClick={() => console.log('clicked Edu Spending PC')}
+              sx={{
+                backgroundColor: '#DBDD7A',
+                color: 'black',
+                py: 1.5,
+                px: 3,
+                borderRadius: '12px',
+                fontWeight: 'bold',
+                '&:hover': { backgroundColor: '#DBDD7A' },
+              }}
+            >
+              Edu Spending PC
+            </Button>
+            </Grid>
+            </Grid>
+            {/* Add more buttons specific to text3 */}
+          </>
+        );
+        case '4':
+        return (
+          <>
+           <Grid container spacing={2}>
+           <Grid item xs={12}>
+            <Button
+              variant="contained"
+              onClick={() => console.log('clicked House Spending Pc')}
+              sx={{
+                backgroundColor: '#DBDD7A',
+                color: 'black',
+                py: 1.5,
+                px: 3,
+                borderRadius: '12px',
+                fontWeight: 'bold',
+                '&:hover': { backgroundColor: '#DBDD7A' },
+              }}
+            >
+              House Spending PC
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => console.log('clicked socialization Spending')}
+              sx={{
+                backgroundColor: '#DBDD7A',
+                color: 'black',
+                py: 1.5,
+                px: 3,
+                borderRadius: '12px',
+                fontWeight: 'bold',
+                '&:hover': { backgroundColor: '#DBDD7A' },
+              }}
+            >
+             Socalization Spending
+            </Button>
+            </Grid>
+            </Grid>
+            {/* Add more buttons specific to text3 */}
+          </>
+        );
+        case '5':
+          return (
+            <>
+            <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
+                onClick={() => console.log('clicked % of grievance')}
+                sx={{
+                  backgroundColor: '#DBDD7A',
+                  color: 'black',
+                  py: 1.5,
+                  px: 3,
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  '&:hover': { backgroundColor: '#DBDD7A' },
+                }}
+              >
+                 % of grievance
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => console.log('clicked Grievance redressal')}
+                sx={{
+                  backgroundColor: '#DBDD7A',
+                  color: 'black',
+                  py: 1.5,
+                  px: 3,
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  '&:hover': { backgroundColor: '#DBDD7A' },
+                }}
+              >
+               Grievance redressal
+              </Button>
+              </Grid>
+              </Grid>
+              {/* Add more buttons specific to text3 */}
+            </>
+          );
+          case '6':
+            return (
+              <>
+              <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  onClick={() => console.log('clicked Spending on socail security PC')}
+                  sx={{
+                    backgroundColor: '#DBDD7A',
+                    color: 'black',
+                    py: 1.5,
+                    px: 3,
+                    borderRadius: '12px',
+                    fontWeight: 'bold',
+                    '&:hover': { backgroundColor: '#DBDD7A' },
+                  }}
+                >
+                  Spending on socail security PC
+                </Button>
+                </Grid>
+                </Grid>
+                {/* Add more buttons specific to text3 */}
+              </>
+            );
+            case '7':
+              return (
+                <>
+                <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    onClick={() => console.log('clicked CSR Spending on profit')}
+                    sx={{
+                      backgroundColor: '#DBDD7A',
+                      color: 'black',
+                      py: 1.5,
+                      px: 3,
+                      borderRadius: '12px',
+                      fontWeight: 'bold',
+                      '&:hover': { backgroundColor: '#DBDD7A' },
+                    }}
+                  >
+                    CSR Spending on profit
+                  </Button>
+                  </Grid>
+                  </Grid>
+                  {/* Add more buttons specific to text3 */}
+                </>
+              );
+              case '8':
+                return (
+                  <>
+                   <Grid container spacing={2}>
+                   <Grid item xs={12}>
+                    <Button
+                      variant="contained"
+                      onClick={() => console.log('clicked Spending towards rehabilitations measures on cost of expansion')}
+                      sx={{
+                        backgroundColor: '#DBDD7A',
+                        color: 'black',
+                        py: 1.5,
+                        px: 3,
+                        borderRadius: '12px',
+                        fontWeight: 'bold',
+                        '&:hover': { backgroundColor: '#DBDD7A' },
+                      }}
+                    >
+                      Spending towards rehabilitations measures on cost of expansion
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => console.log('clicked No.of Parties/families impacted Vs compensated')}
+                      sx={{
+                        backgroundColor: '#DBDD7A',
+                        color: 'black',
+                        py: 1.5,
+                        px: 3,
+                        borderRadius: '12px',
+                        fontWeight: 'bold',
+                        '&:hover': { backgroundColor: '#DBDD7A' },
+                      }}
+                    >
+                     No.of Parties/families impacted Vs compensated
+                    </Button>
+                    </Grid>
+                    </Grid>
+                    {/* Add more buttons specific to text3 */}
+                  </>
+                );
+      // Add other cases for text4, text5, etc.
+      default:
+        return null;
+    }
+  };
+
+  if (!imageId) {
+    return <Typography>No image selected</Typography>;
+  }
 
   return (
-    <Box sx={{ minHeight: "100vh", width: "100%", backgroundColor: "#81A895" }}>
-      <AppHeader />
-      <Typography
-        variant="h4"
-        color="white"
-        sx={{ mb: 3, fontWeight: "bold", textAlign: "center", mt: 4 }}
+    <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Header */}
+      <Box
+        sx={{
+          backgroundColor: '#DBDD7A',
+          p: 2,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+        }}
       >
-        Social Image {pageId} Details
-      </Typography>
-      <Container sx={{ textAlign: "center", padding: 4 }}>
-        <Button
-          variant="contained"
-          onClick={() => navigate(`/social-details/${pageId}/1`)}
+        <ArrowBackIcon 
+          sx={{ 
+            cursor: 'pointer', 
+            fontSize: 24,
+            color: 'black'
+          }} 
+          onClick={() => navigate(-1)} 
+        />
+        <Typography
+          variant="h6"
           sx={{
-            backgroundColor: "#F4D035",
-            color: "black",
-            marginBottom: "5px",
-            width: "80%",
-            borderRadius: "20px",
-            padding: "12px 0",
-            fontWeight: "bold",
-            '&:hover': { backgroundColor: "#A8C63A" },
+            color: 'black',
+            fontWeight: 'bold',
+            flexGrow: 1,
           }}
         >
-          No. employees
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => navigate(`/social-details/${pageId}/2`)}
-          sx={{
-            backgroundColor: "#F4D035",
-            color: "black",
-            marginBottom: "5px",
-            width: "80%",
-            borderRadius: "20px",
-            padding: "12px 0",
-            fontWeight: "bold",
-            '&:hover': { backgroundColor: "#A8C63A" },
-          }}
-        >
-          Ave. Salary, Rationale for salary structure
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => navigate(`/social-details/${pageId}/3`)}
-          sx={{
-            backgroundColor: "#F4D035",
-            color: "black",
-            marginBottom: "5px",
-            width: "80%",
-            borderRadius: "20px",
-            padding: "12px 0",
-            fontWeight: "bold",
-            '&:hover': { backgroundColor: "#A8C63A" },
-          }}
-        >
-          Bonuses/incentives/other benefits
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => navigate(`/social-details/${pageId}/4`)}
-          sx={{
-            backgroundColor: "#F4D035",
-            color: "black",
-            width: "80%",
-            borderRadius: "20px",
-            padding: "12px 0",
-            fontWeight: "bold",
-            '&:hover': { backgroundColor: "#A8C63A" },
-          }}
-        >
-          Salary expenses on cost
-        </Button>
-      </Container>
+          {getPageTitle(imageId)}
+        </Typography>
+      </Box>
+
+      {/* Content */}
+      <Box
+        sx={{
+          flexGrow: 1,
+          backgroundColor: '#81A895',
+          p: 3,
+          overflowY: 'auto'
+        }}
+      >
+        <Container maxWidth="sm">
+          {renderButtonsForImage(imageId)}
+        </Container>
+      </Box>
     </Box>
   );
 };
+
 const CardDetailsPage: FC = () => {
   const { cardId } = useParams();
   const location = useLocation();
@@ -2226,6 +2579,7 @@ const App: FC = () => {
         <Route path="/admin/environmental" element={<Page3WithButtons />} />
         <Route path="/admin/economic" element={<Page4 />} />
         <Route path="/admin/social" element={<Page5 />} />
+        <Route path="/buttons-page/:imageId" element={<ButtonsPage />} />
         <Route path="/admin/card-details/:cardId" element={<CardDetailsPage />} />
         <Route path="/admin/economic-details/:cardId" element={<EconomicDetailsPage />} />
         <Route path="/admin/social-details/:cardId" element={<CardDetailsPage />} />
