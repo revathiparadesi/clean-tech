@@ -91,18 +91,18 @@ const HomePage: FC = () => {
       <Container sx={{ textAlign: "center", color: "white", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 64px)" }}>
         <Grid container spacing={25}>
           <Grid item xs={12} md={6}>
-            <img src={homepage} alt="Home Page" style={{ width: "110%", height: "auto", borderRadius: "10px" }} />
+            <img src={homepage} alt="Home Page" style={{ width: "80%", height: "700", borderRadius: "10px" }} />
           </Grid>
           <Grid item xs={12} md={6}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
-                <img src={im1} alt="Stacked Image 1" style={{ width: "110%", height: "auto", borderRadius: "10px" }} />
+                <img src={im1} alt="Stacked Image 1" style={{ width: "80%", height: "auto", borderRadius: "10px" }} />
               </Grid>
               <Grid item xs={12}>
-                <img src={im2} alt="Stacked Image 2" style={{ width: "110%", height: "auto", borderRadius: "10px" }} />
+                <img src={im2} alt="Stacked Image 2" style={{ width: "80%", height: "auto", borderRadius: "10px" }} />
               </Grid>
               <Grid item xs={12}>
-                <img src={im3} alt="Stacked Image 3" style={{ width: "110%", height: "auto", borderRadius: "10px" }} />
+                <img src={im3} alt="Stacked Image 3" style={{ width: "80%", height: "auto", borderRadius: "10px" }} />
               </Grid>
             </Grid>
           </Grid>
@@ -124,18 +124,18 @@ const LoginPage: FC = () => {
         flexDirection: "column", 
         alignItems: "center", 
         justifyContent: "center",
-        minHeight: "calc(100vh - 64px)"
+        minHeight: "calc(90vh - 50px)"
       }}>
-        <Typography variant="h3" sx={{ mb: 8, color: "white", fontWeight: "bold" }}>
+        <Typography variant="h3" sx={{ mb: 5, color: "white", fontWeight: "bold" }}>
           Login
         </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          <Grid item xs={12} sm={6} md={4}>
+        <Grid container spacing={6} justifyContent="center">
+          <Grid item xs={2} sm={4} md={2}>
             <Button
               onClick={() => navigate("/user-login")}
               sx={{
                 width: "100%",
-                py: 3,
+                py: 1,
                 backgroundColor: "#DBDD7A",
                 color: "black",
                 fontSize: "1.25rem",
@@ -148,12 +148,12 @@ const LoginPage: FC = () => {
               User Login
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={2} sm={4} md={2}>
             <Button
               onClick={() => navigate("/admin-login")}
               sx={{
                 width: "100%",
-                py: 3,
+                py: 1,
                 backgroundColor: "#DBDD7A",
                 color: "black",
                 fontSize: "1.25rem",
@@ -289,7 +289,7 @@ const AdminLoginPage: FC = () => {
       <AppHeader />
       <Container maxWidth="sm" sx={{ pt: 4 }}>
         <Box sx={{ 
-          mt: 8,
+          mt: 5,
           display: "flex",
           flexDirection: "column",
           gap: 4
@@ -365,7 +365,7 @@ const AdminLoginPage: FC = () => {
 const AdminDashboard: FC = () => {
   const navigate = useNavigate();
 
-  const radius = 300;
+  const radius = 250;
 
   const icons: Icon[] = [
     { imgSrc: Frame16, angle: 270, route: "/page3" },
@@ -376,7 +376,7 @@ const AdminDashboard: FC = () => {
   return (
     <Box sx={{ minHeight: "100vh", width: "100%", backgroundColor: "#81A895" }}>
       <AppHeader />
-      <Container sx={{ position: "relative", width: 100, height: 900, margin: "auto", mt: 4 }}>
+      <Container sx={{ position: "relative", width: 100, height: 800, margin: "auto", mt: 10 }}>
         {icons.map((icon, index) => {
           const angleRad = (icon.angle * Math.PI) / 180;
           const x = radius * Math.cos(angleRad);
@@ -395,7 +395,7 @@ const AdminDashboard: FC = () => {
               }}
               onClick={() => icon.route && navigate(icon.route)}
             >
-              <Box component="img" src={icon.imgSrc} alt={`icon-${index}`} sx={{ width: 150, height: 150, mb: 0, borderRadius: "50%" }} />
+              <Box component="img" src={icon.imgSrc} alt={`icon-${index}`} sx={{ width: 120, height: 120, mb: 10, borderRadius: "50%" }} />
             </Box>
           );
         })}
@@ -439,7 +439,7 @@ const UserDashboard: FC = () => {
               }}
               onClick={() => icon.route && navigate(icon.route)}
             >
-              <Box component="img" src={icon.imgSrc} alt={`icon-${index}`} sx={{ width: 150, height: 150, mb: 0, borderRadius: "50%" }} />
+              <Box component="img" src={icon.imgSrc} alt={`icon-${index}`} sx={{ width: 120, height: 120, mb: 0, borderRadius: "50%" }} />
             </Box>
           );
         })}
@@ -594,7 +594,7 @@ const NextPage: FC = () => {
               }}
               onClick={() => icon.route && navigate(icon.route)}
             >
-              <Box component="img" src={icon.imgSrc} alt={`icon-${index}`} sx={{ width: 150, height: 150, mb: 0, borderRadius: "50%" }} />
+              <Box component="img" src={icon.imgSrc} alt={`icon-${index}`} sx={{ width: 120, height: 120, mb: 0, borderRadius: "50%" }} />
             </Box>
           );
         })}
@@ -710,18 +710,150 @@ const Page4: FC = () => {
 };
 
 
-
-const Page5 = () => {
+const PageHeader = ({
+  title = 'Clean Tech',
+  showBack = false,
+  onBack
+}: {
+  title?: string;
+  showBack?: boolean;
+  onBack?: () => void;
+}) => {
   const navigate = useNavigate();
 
-  // Handle the image click and navigate to the buttons page
-  const handleImageClick = (imageId: string) => {
-    navigate(`/buttons-page/${imageId}`); // Pass imageId to navigate to the corresponding page
+  // Conditional Back Button
+  const handleBack = () => {
+    if (onBack) {
+      onBack(); // Custom onBack handler
+    } else {
+      navigate(-1); // Go back to the previous page
+    }
   };
 
   return (
+    <Box
+      sx={{
+        backgroundColor: '#DBDD7A',
+        p: 2,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between', // This will position items on both sides
+      }}
+    >
+      <Typography
+        variant="h6"
+        sx={{
+          color: 'black',
+          fontWeight: 'bold',
+          textAlign: 'left', // Title is aligned to the left
+          flexGrow: 1, // This ensures the title takes up space
+        }}
+      >
+        {title}
+      </Typography>
+
+      {showBack && (
+        <IconButton edge="end" color="inherit" onClick={handleBack}>
+          <ArrowBackIcon sx={{ color: 'black' }} />
+        </IconButton>
+      )}
+    </Box>
+  );
+};
+
+// Table Component
+const AnalysisTable = () => {
+  const [rows, setRows] = useState([
+    { process: 'Raw to WB', hides: '', skin: '' },
+    { process: 'Raw to Veg', hides: '', skin: '' },
+    { process: 'WB/Veg to FL', hides: '', skin: '' },
+    { process: 'Raw to FL', hides: '', skin: '' }
+  ]);
+
+  const handleChange = (index: number, field: 'hides' | 'skin', value: string) => {
+    const updatedRows = [...rows];
+    updatedRows[index][field] = value;
+    setRows(updatedRows);
+  };
+
+  return (
+    <Box sx={{ width: '100%', mt: 3 }}>
+      <Container>
+        <TableContainer
+          component={Paper}
+          sx={{ maxWidth: 700, borderRadius: 2, mx: 'auto' }}
+        >
+          <Table>
+            <TableHead>
+              <TableRow sx={{ backgroundColor: '#5e7f70' }}>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold', borderRight: '1px solid white' }}>Process</TableCell>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold', borderRight: '1px solid white' }}>Hides</TableCell>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Skin</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell sx={{ borderRight: '1px solid #ccc' }}>{row.process}</TableCell>
+                  <TableCell sx={{ borderRight: '1px solid #ccc' }}>
+                    <TextField
+                      variant="standard"
+                      value={row.hides}
+                      onChange={(e) => handleChange(index, 'hides', e.target.value)}
+                      fullWidth
+                      size="small"
+                      InputProps={{ disableUnderline: true }}
+                      sx={{ backgroundColor: 'white', borderRadius: 1 }}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <TextField
+                      variant="standard"
+                      value={row.skin}
+                      onChange={(e) => handleChange(index, 'skin', e.target.value)}
+                      fullWidth
+                      size="small"
+                      InputProps={{ disableUnderline: true }}
+                      sx={{ backgroundColor: 'white', borderRadius: 1 }}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    </Box>
+  );
+};
+
+// Main Page Component
+const Page5 = () => {
+  const navigate = useNavigate();
+  const images = [
+    { src: text1, alt: 'Employees', id: '1' },
+    { src: text2, alt: 'Health & Safety', id: '2' },
+    { src: text3, alt: 'Education', id: '3' },
+    { src: text4, alt: 'Housing', id: '4' },
+    { src: text5, alt: 'Grievances', id: '5' },
+    { src: text6, alt: 'Social Security', id: '6' },
+    { src: text7, alt: 'CSR', id: '7' },
+    { src: text8, alt: 'Rehabilitation', id: '8' }
+  ];
+
+  return (
     <Box sx={{ minHeight: '100vh', width: '100%', backgroundColor: '#81A895' }}>
-      <AppHeader />
+      {/* Header Section (AppBar) */}
+      <AppBar position="static" sx={{ backgroundColor: "#DBDD7A" }}>
+        <Toolbar>
+          <Typography variant="h5" sx={{ flexGrow: 1, color: "black", textAlign: "left", fontWeight: "bold" }}>
+            CLEAN TECH
+          </Typography>
+          <IconButton edge="end" color="inherit" onClick={() => navigate(-1)}>
+            <ArrowBackIcon sx={{ color: "black" }} />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
       <Typography
         variant="h4"
         color="white"
@@ -731,71 +863,22 @@ const Page5 = () => {
       </Typography>
       <Container sx={{ textAlign: 'center', padding: 4 }}>
         <Grid container spacing={4} justifyContent="center">
-          {/* Image Grid */}
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text1}
-              alt="Social Image 1"
-              onClick={() => handleImageClick('1')} // Navigate to buttons page for text1 image
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text2}
-              alt="Social Image 2"
-              onClick={() => handleImageClick('2')} // Navigate to buttons page for text2 image
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text3}
-              alt="Social Image 3"
-              onClick={() => handleImageClick('3')}
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text4}
-              alt="Social Image 4"
-              onClick={() => handleImageClick('4')}
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text5}
-              alt="Social Image 5"
-              onClick={() => handleImageClick('5')}
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text6}
-              alt="Social Image 6"
-              onClick={() => handleImageClick('6')}
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text7}
-              alt="Social Image 7"
-              onClick={() => handleImageClick('7')}
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <img
-              src={text8}
-              alt="Social Image 8"
-              onClick={() => handleImageClick('8')}
-              style={{ width: '100%', height: '30vh', borderRadius: '2px', cursor: 'pointer' }}
-            />
-          </Grid>
+          {images.map((img) => (
+            <Grid item xs={12} sm={6} md={3} key={img.id}>
+              <img
+                src={img.src}
+                alt={img.alt}
+                onClick={() => navigate(`/buttons-page/${img.id}`)}
+                style={{
+                  width: '100%',
+                  height: '30vh',
+                  borderRadius: '2px',
+                  cursor: 'pointer',
+                  objectFit: 'cover'
+                }}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </Box>
@@ -804,432 +887,140 @@ const Page5 = () => {
 const ButtonsPage = () => {
   const navigate = useNavigate();
   const { imageId } = useParams();
-  const buttonStyle = {
-    backgroundColor: '#DBDD7A',
-    color: 'black',
-    py: 1.5,
-    px: 3,
-    borderRadius: '12px',
-    fontWeight: 'bold',
-    textTransform: 'none',
-    mb: 2,
-    width: '100%',
-    '&:hover': { backgroundColor: '#c5c76e' },
-  };
-
+  const [visibleTableIndex, setVisibleTableIndex] = useState<number | null>(0); // Default to showing the first table
+  const [isFirstButtonClicked, setIsFirstButtonClicked] = useState<boolean>(false); // Track if first button was clicked
 
   const getPageTitle = (id: string) => {
-    switch (id) {
-      case '1':
-        return 'EMPLOYEES';
-      case '2':
-        return 'HEALTH & SAFETY';
-      case '3':
-        return 'EDUCATION';
-      case '4':
-        return 'HOUSING';
-      case '5':
-        return 'GRIEVANCES';
-      case '6':
-        return 'SOCIAL SECURITY';
-      case '7':
-        return 'CSR';
-      case '8':
-        return 'REHABILITATION';
-      default:
-        return '';
-    }
+    const titles: { [key: string]: string } = {
+      '1': 'EMPLOYEES',
+      '2': 'HEALTH & SAFETY',
+      '3': 'EDUCATION',
+      '4': 'HOUSING',
+      '5': 'GRIEVANCES',
+      '6': 'SOCIAL SECURITY',
+      '7': 'CSR',
+      '8': 'REHABILITATION'
+    };
+    return titles[id] || '';
   };
 
-  const renderButtonsForImage = (imageId: string) => {
-    switch (imageId) {
-      case '1':
-        return (
-          <Grid container spacing={2} justifyContent="flex-start">
-            <Grid item sm={2} md={6}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => console.log('Clicked No. employees')}
-                sx={{
-                  backgroundColor: '#DBDD7A',
-                  color: 'black',
-                  py: 1.5,
-                  px: 3,
-                  borderRadius: '12px',
-                  fontWeight: 'bold',
-                  textTransform: 'none',
-                  mb: 2,
-                  '&:hover': { backgroundColor: '#c5c76e' },
-                }}
-              >
-                No. employees
-              </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => console.log('Clicked Ave,salary,rationale for salary')}
-                sx={{
-                  backgroundColor: '#DBDD7A',
-                  color: 'black',
-                  py: 1.5,
-                  px: 3,
-                  borderRadius: '12px',
-                  fontWeight: 'bold',
-                  textTransform: 'none',
-                  mb: 2,
-                  '&:hover': { backgroundColor: '#c5c76e' },
-                }}
-              >
-                Ave,Salary,Rationale for salary
-              </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => console.log('Clicked Bonuses/incentives/other benefits')}
-                sx={{
-                  backgroundColor: '#DBDD7A',
-                  color: 'black',
-                  py: 1.5,
-                  px: 3,
-                  borderRadius: '12px',
-                  fontWeight: 'bold',
-                  textTransform: 'none',
-                  mb: 2,
-                  '&:hover': { backgroundColor: '#c5c76e' },
-                }}
-              >
-                Bonuses/incentives/other benefits
-              </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => console.log('Clicked salary expenses on cost')}
-                sx={{
-                  backgroundColor: '#DBDD7A',
-                  color: 'black',
-                  py: 1.5,
-                  px: 3,
-                  borderRadius: '12px',
-                  fontWeight: 'bold',
-                  textTransform: 'none',
-                  mb: 2,
-                  '&:hover': { backgroundColor: '#c5c76e' },
-                }}
-              >
-                Salary expenses on cost
-              </Button>
-            </Grid>
-          </Grid>
-        );
-        case '2':
-        return (
-          <>
-          <Grid container spacing={4} justifyContent="flex-start">
-          <Grid item sm={2} md={6}>
-            <Button
-              variant="contained"
-              onClick={() => console.log('Clicked Health Spending %')}
-              sx={{
-                backgroundColor: '#DBDD7A',
-                color: 'black',
-                py: 1.5,
-                px: 3,
-                borderRadius: '12px',
-                fontWeight: 'bold',
-                '&:hover': { backgroundColor: '#DBDD7A' },
-              }}
-            >
-              Health Spending %
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => console.log('Clicked Accidents')}
-              sx={{
-                backgroundColor: '#DBDD7A',
-                color: 'black',
-                py: 1.5,
-                px: 3,
-                borderRadius: '12px',
-                fontWeight: 'bold',
-                '&:hover': { backgroundColor: '#DBDD7A' },
-              }}
-            >
-              Accidents
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => console.log('Clicked Safety Spending %')}
-              sx={{
-                backgroundColor: '#DBDD7A',
-                color: 'black',
-                py: 1.5,
-                px: 3,
-                borderRadius: '12px',
-                fontWeight: 'bold',
-                '&:hover': { backgroundColor: '#DBDD7A' },
-              }}
-            >
-              Safety Spending %
-            </Button>
-            </Grid>
-            </Grid>
-          </>
-        );
-      case '3':
-        return (
-          <>
-          <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Button
-              variant="contained"
-              onClick={() => console.log('clicked Edu Spending PC')}
-              sx={{
-                backgroundColor: '#DBDD7A',
-                color: 'black',
-                py: 1.5,
-                px: 3,
-                borderRadius: '12px',
-                fontWeight: 'bold',
-                '&:hover': { backgroundColor: '#DBDD7A' },
-              }}
-            >
-              Edu Spending PC
-            </Button>
-            </Grid>
-            </Grid>
-            {/* Add more buttons specific to text3 */}
-          </>
-        );
-        case '4':
-        return (
-          <>
-           <Grid container spacing={2}>
-           <Grid item xs={12}>
-            <Button
-              variant="contained"
-              onClick={() => console.log('clicked House Spending Pc')}
-              sx={{
-                backgroundColor: '#DBDD7A',
-                color: 'black',
-                py: 1.5,
-                px: 3,
-                borderRadius: '12px',
-                fontWeight: 'bold',
-                '&:hover': { backgroundColor: '#DBDD7A' },
-              }}
-            >
-              House Spending PC
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => console.log('clicked socialization Spending')}
-              sx={{
-                backgroundColor: '#DBDD7A',
-                color: 'black',
-                py: 1.5,
-                px: 3,
-                borderRadius: '12px',
-                fontWeight: 'bold',
-                '&:hover': { backgroundColor: '#DBDD7A' },
-              }}
-            >
-             Socalization Spending
-            </Button>
-            </Grid>
-            </Grid>
-            {/* Add more buttons specific to text3 */}
-          </>
-        );
-        case '5':
-          return (
-            <>
-            <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                onClick={() => console.log('clicked % of grievance')}
-                sx={{
-                  backgroundColor: '#DBDD7A',
-                  color: 'black',
-                  py: 1.5,
-                  px: 3,
-                  borderRadius: '12px',
-                  fontWeight: 'bold',
-                  '&:hover': { backgroundColor: '#DBDD7A' },
-                }}
-              >
-                 % of grievance
-              </Button>
-              <Button
-                variant="contained"
-                onClick={() => console.log('clicked Grievance redressal')}
-                sx={{
-                  backgroundColor: '#DBDD7A',
-                  color: 'black',
-                  py: 1.5,
-                  px: 3,
-                  borderRadius: '12px',
-                  fontWeight: 'bold',
-                  '&:hover': { backgroundColor: '#DBDD7A' },
-                }}
-              >
-               Grievance redressal
-              </Button>
-              </Grid>
-              </Grid>
-              {/* Add more buttons specific to text3 */}
-            </>
-          );
-          case '6':
-            return (
-              <>
-              <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Button
-                  variant="contained"
-                  onClick={() => console.log('clicked Spending on socail security PC')}
-                  sx={{
-                    backgroundColor: '#DBDD7A',
-                    color: 'black',
-                    py: 1.5,
-                    px: 3,
-                    borderRadius: '12px',
-                    fontWeight: 'bold',
-                    '&:hover': { backgroundColor: '#DBDD7A' },
-                  }}
-                >
-                  Spending on socail security PC
-                </Button>
-                </Grid>
-                </Grid>
-                {/* Add more buttons specific to text3 */}
-              </>
-            );
-            case '7':
-              return (
-                <>
-                <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Button
-                    variant="contained"
-                    onClick={() => console.log('clicked CSR Spending on profit')}
-                    sx={{
-                      backgroundColor: '#DBDD7A',
-                      color: 'black',
-                      py: 1.5,
-                      px: 3,
-                      borderRadius: '12px',
-                      fontWeight: 'bold',
-                      '&:hover': { backgroundColor: '#DBDD7A' },
-                    }}
-                  >
-                    CSR Spending on profit
-                  </Button>
-                  </Grid>
-                  </Grid>
-                  {/* Add more buttons specific to text3 */}
-                </>
-              );
-              case '8':
-                return (
-                  <>
-                   <Grid container spacing={2}>
-                   <Grid item xs={12}>
-                    <Button
-                      variant="contained"
-                      onClick={() => console.log('clicked Spending towards rehabilitations measures on cost of expansion')}
-                      sx={{
-                        backgroundColor: '#DBDD7A',
-                        color: 'black',
-                        py: 1.5,
-                        px: 3,
-                        borderRadius: '12px',
-                        fontWeight: 'bold',
-                        '&:hover': { backgroundColor: '#DBDD7A' },
-                      }}
-                    >
-                      Spending towards rehabilitations measures on cost of expansion
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={() => console.log('clicked No.of Parties/families impacted Vs compensated')}
-                      sx={{
-                        backgroundColor: '#DBDD7A',
-                        color: 'black',
-                        py: 1.5,
-                        px: 3,
-                        borderRadius: '12px',
-                        fontWeight: 'bold',
-                        '&:hover': { backgroundColor: '#DBDD7A' },
-                      }}
-                    >
-                     No.of Parties/families impacted Vs compensated
-                    </Button>
-                    </Grid>
-                    </Grid>
-                    {/* Add more buttons specific to text3 */}
-                  </>
-                );
-      // Add other cases for text4, text5, etc.
-      default:
-        return null;
-    }
+  const getButtons = (id: string) => {
+    const buttonsMap: { [key: string]: string[] } = {
+      '1': ['No. employees', 'Ave,Salary,Rationale for salary', 'Bonuses/incentives/other benefits', 'Salary expenses on cost'],
+      '2': ['Health Spending %', 'Accidents', 'Safety Spending %'],
+      '3': ['Edu Spending PC'],
+      '4': ['House Spending PC', 'Socialization Spending'],
+      '5': ['% of grievance', 'Grievance redressal'],
+      '6': ['Spending on social security PC'],
+      '7': ['CSR Spending on profit'],
+      '8': ['Spending towards rehabilitations measures on cost of expansion', 'No.of Parties/families impacted Vs compensated']
+    };
+    return buttonsMap[id] || [];
   };
 
-  if (!imageId) {
-    return <Typography>No image selected</Typography>;
-  }
+  const handleSubmit = () => {
+    // Handle the submit action here
+    console.log("Data submitted!");
+  };
+
+  const handleButtonClick = (index: number) => {
+    if (index === 0) {
+      setIsFirstButtonClicked(true); // Mark the first button as clicked
+    }
+    setVisibleTableIndex(index); // Show the corresponding table
+  };
 
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Header */}
-      <Box
-        sx={{
-          backgroundColor: '#DBDD7A',
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-        }}
-      >
-        <ArrowBackIcon 
-          sx={{ 
-            cursor: 'pointer', 
-            fontSize: 24,
-            color: 'black'
-          }} 
-          onClick={() => navigate(-1)} 
-        />
-        <Typography
-          variant="h6"
-          sx={{
-            color: 'black',
-            fontWeight: 'bold',
-            flexGrow: 1,
-          }}
-        >
-          {getPageTitle(imageId)}
-        </Typography>
-      </Box>
+      {/* Header Section */}
+      <PageHeader title={getPageTitle(imageId || '')} showBack onBack={() => navigate(-1)} />
+      
+      <Box sx={{ flexGrow: 1, backgroundColor: '#81A895', p: 3, overflowY: 'auto' }}>
+        <Grid container spacing={3}>
+          {/* Left side - Buttons */}
+          <Grid item xs={12} sm={4}>
+            <Container>
+              {getButtons(imageId || '').map((label, index) => (
+                <React.Fragment key={index}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={() => handleButtonClick(index)}
+                    disabled={isFirstButtonClicked && index === 0} // Disable the first button after it's clicked
+                    sx={{
+                      backgroundColor: '#DBDD7A',
+                      color: 'black',
+                      py: 1,
+                      px: 3,
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      textTransform: 'none',
+                      mb: 2,
+                      '&:hover': { backgroundColor: '#c5c76e' },
+                    }}
+                  >
+                    {label}
+                  </Button>
+                </React.Fragment>
+              ))}
+            </Container>
+          </Grid>
 
-      {/* Content */}
-      <Box
-        sx={{
-          flexGrow: 1,
-          backgroundColor: '#81A895',
-          p: 3,
-          overflowY: 'auto'
-        }}
-      >
-        <Container maxWidth="sm">
-          {renderButtonsForImage(imageId)}
-        </Container>
+          {/* Right side - Tables */}
+          <Grid item xs={12} sm={8}>
+            <Container maxWidth="sm">
+              {/* Always show the first table */}
+              <React.Fragment>
+                {visibleTableIndex === 0 && (
+                  <>
+                    <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'center', mb: 2 }}>
+                      {getButtons(imageId || '')[0]} {/* First button name as table title */}
+                    </Typography>
+                    <AnalysisTable /> {/* First table component */}
+                  </>
+                )}
+              </React.Fragment>
+
+              {/* Toggle other tables based on button click */}
+              {getButtons(imageId || '').map((label, index) => (
+                index !== 0 && (
+                  <React.Fragment key={index}>
+                    {visibleTableIndex === index && (
+                      <>
+                        <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'center', mb: 2 }}>
+                          {label} {/* Button name as table title */}
+                        </Typography>
+                        <AnalysisTable /> {/* Your table component */}
+                      </>
+                    )}
+                  </React.Fragment>
+                )
+              ))}
+
+              <Box sx={{ textAlign: 'center', mt: 3 }}>
+                <Button
+                  variant="contained"
+                  onClick={handleSubmit}
+                  sx={{
+                    backgroundColor: '#DBDD7A',
+                    color: 'black',
+                    py: 1,
+                    px: 3,
+                    borderRadius: '8px',
+                    fontWeight: 'bold',
+                    '&:hover': { backgroundColor: '#c5c76e' },
+                  }}
+                >
+                  Submit
+                </Button>
+              </Box>
+            </Container>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
 };
-
 const CardDetailsPage: FC = () => {
   const { cardId } = useParams();
   const location = useLocation();
@@ -1695,18 +1486,22 @@ const CardDetailsPage: FC = () => {
             </Typography>
             <Grid container spacing={4}>
               <Grid item xs={12} md={3}>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Box sx={{ display: "flex", flexDirection: "column", gap:0 }}>
                   {resourceButtons.map((button) => (
                     <Button
                       key={button}
                       variant="contained"
                       onClick={() => setSelectedButton(button)}
                       sx={{
-                        backgroundColor: selectedButton === button ? "#a8aa61" : "#DBDD7A",
-                        color: "black",
-                        '&:hover': {
-                          backgroundColor: "#a8aa61"
-                        }
+                        backgroundColor: '#DBDD7A',
+                        color: 'black',
+                        py: 1,
+                        px: 3,
+                        borderRadius: '8px',
+                        fontWeight: 'bold',
+                        textTransform: 'none',
+                        mb: 2,
+                        '&:hover': { backgroundColor: '#c5c76e' },
                       }}
                     >
                       {button}
@@ -1729,18 +1524,22 @@ const CardDetailsPage: FC = () => {
             </Typography>
             <Grid container spacing={4}>
               <Grid item xs={12} md={3}>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 0 }}>
                   {wasteButtons.map((button) => (
                     <Button
                       key={button}
                       variant="contained"
                       onClick={() => setSelectedWasteButton(button)}
                       sx={{
-                        backgroundColor: selectedWasteButton === button ? "#a8aa61" : "#DBDD7A",
-                        color: "black",
-                        '&:hover': {
-                          backgroundColor: "#a8aa61"
-                        }
+                        backgroundColor: '#DBDD7A',
+                        color: 'black',
+                        py: 1,
+                        px: 3,
+                        borderRadius: '8px',
+                        fontWeight: 'bold',
+                        textTransform: 'none',
+                        mb: 2,
+                        '&:hover': { backgroundColor: '#c5c76e' },
                       }}
                     >
                       {button}
@@ -1763,18 +1562,22 @@ const CardDetailsPage: FC = () => {
             </Typography>
             <Grid container spacing={4}>
               <Grid item xs={12} md={3}>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 0 }}>
                   {complianceButtons.map((button) => (
                     <Button
                       key={button}
                       variant="contained"
                       onClick={() => setSelectedComplianceButton(button)}
                       sx={{
-                        backgroundColor: selectedComplianceButton === button ? "#a8aa61" : "#DBDD7A",
-                        color: "black",
-                        '&:hover': {
-                          backgroundColor: "#a8aa61"
-                        }
+                        backgroundColor: '#DBDD7A',
+                        color: 'black',
+                        py: 1,
+                        px: 3,
+                        borderRadius: '8px',
+                        fontWeight: 'bold',
+                        textTransform: 'none',
+                        mb: 2,
+                        '&:hover': { backgroundColor: '#c5c76e' },
                       }}
                     >
                       {button}
@@ -1821,22 +1624,22 @@ const CardDetailsPage: FC = () => {
   return (
     <Box sx={{ minHeight: "100vh", width: "100%", backgroundColor: "#81A895" }}>
       <AppHeader />
-     title: 'Turnover Analysis',
-      butt   <Container sx={{ py: 4 }}>
+         <Container sx={{ py: 4 }}>
         {renderContent()}
         {(cardId === "1" || cardId === "2" || cardId === "3") && (
           <Button
             variant="contained"
             onClick={handleSubmit}
             sx={{
-              backgroundColor: "#DBDD7A",
-              color: "black",
-              px: 3,
+              backgroundColor: '#DBDD7A',
+              color: 'black',
               py: 1,
-              fontWeight: "bold",
-              '&:hover': {
-                backgroundColor: "#a8aa61"
-              }
+              px: 3,
+              borderRadius: '8px',
+              fontWeight: 'bold',
+              textTransform: 'none',
+              mb: 2,
+              '&:hover': { backgroundColor: '#c5c76e' },
             }}
           >
             Submit
@@ -2523,20 +2326,21 @@ const CardDetailsPage: FC = () => {
           </Typography>
           <Grid container spacing={4}>
             <Grid item xs={20} md={3}>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 0}}>
                 {currentCard.buttons.map((button) => (
                   <Button
                     key={button}
                     onClick={() => setSelectedButton(button)}
                     sx={{
-                      backgroundColor: selectedButton === button ? "#a8aa61" : "#DBDD7A",
-                      color: "black",
+                      backgroundColor: '#DBDD7A',
+                      color: 'black',
                       py: 1,
-                      width: "100%",
-                      fontWeight: "bold",
-                      '&:hover': {
-                        backgroundColor: "#a8aa61",
-                      },
+                      px: 3,
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      textTransform: 'none',
+                      mb: 2,
+                      '&:hover': { backgroundColor: '#c5c76e' },
                     }}
                   >
                     {button}
@@ -2578,7 +2382,7 @@ const App: FC = () => {
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin/environmental" element={<Page3WithButtons />} />
         <Route path="/admin/economic" element={<Page4 />} />
-        <Route path="/admin/social" element={<Page5 />} />
+        <Route path="/admin/social" element={<Page5 />} /> 
         <Route path="/buttons-page/:imageId" element={<ButtonsPage />} />
         <Route path="/admin/card-details/:cardId" element={<CardDetailsPage />} />
         <Route path="/admin/economic-details/:cardId" element={<EconomicDetailsPage />} />
